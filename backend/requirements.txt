@@ -1,0 +1,25 @@
+# ============================================================
+# requirements.txt - Python 依赖包列表
+# ============================================================
+# 使用方法：在 backend 目录执行 pip install -r requirements.txt
+# ============================================================
+
+# FastAPI - 现代 Python Web 框架，处理 HTTP 请求，自动生成 API 文档
+fastapi==0.111.0
+
+# Uvicorn - ASGI 服务器，让 FastAPI 跑起来监听 HTTP 请求
+uvicorn[standard]==0.29.0
+
+# OpenAI SDK - 同样用于调用千问 API
+# 原理：通义千问提供兼容 OpenAI 格式的接口，直接复用 openai 库
+# 不需要安装额外的阿里云 SDK
+openai==1.30.1
+
+# Requests - HTTP 请求库，用于调用天气 API
+requests==2.32.3
+
+# python-dotenv - 从 .env 文件读取 API Key 等敏感配置
+python-dotenv==1.0.1
+
+# pydantic - 数据验证库（FastAPI 内部使用）
+pydantic==2.7.1

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>私人助手</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">私人助手</span>
+      </div>
+      <p class="header-sub">多智能体 AI 工作台 · 五大功能一站解决</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section class="feature-section">
+      <h2 class="section-title">选择功能</h2>
+      <div class="feature-grid">
+        <button class="feature-card active" data-feature="weather">
+          <span class="card-icon">🌤</span>
+          <span class="card-name">天气查询</span>
+          <span class="card-desc">实时天气 + 穿衣建议</span>
+        </button>
+        <button class="feature-card" data-feature="travel">
+          <span class="card-icon">✈️</span>
+          <span class="card-name">旅游规划</span>
+          <span class="card-desc">行程安排 + 预算分配</span>
+        </button>
+        <button class="feature-card" data-feature="translate">
+          <span class="card-icon">🌐</span>
+          <span class="card-name">智能翻译</span>
+          <span class="card-desc">直译意译 + 场景适配</span>
+        </button>
+        <button class="feature-card" data-feature="recipe">
+          <span class="card-icon">🍳</span>
+          <span class="card-name">食谱推荐</span>
+          <span class="card-desc">按食材推荐 + 详细步骤</span>
+        </button>
+        <button class="feature-card" data-feature="reply">
+          <span class="card-icon">💬</span>
+          <span class="card-name">社恐回复</span>
+          <span class="card-desc">高情商回复 · 三版可选</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="panel-section">
+
+      <div class="panel active" id="panel-weather">
+        <h3 class="panel-title">🌤 天气查询</h3>
+        <div class="form-group">
+          <label class="form-label">城市名称</label>
+          <input class="form-input" id="weather-city" type="text" placeholder="输入城市，如：北京、上海、成都" />
+        </div>
+        <button class="submit-btn" onclick="submitWeather()">查询天气</button>
+      </div>
+
+      <div class="panel" id="panel-travel">
+        <h3 class="panel-title">✈️ 旅游路线规划</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">出发城市</label>
+            <input class="form-input" id="travel-departure" type="text" placeholder="如：北京" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">目的地</label>
+            <input class="form-input" id="travel-destination" type="text" placeholder="如：云南大理" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">旅行天数</label>
+            <input class="form-input" id="travel-days" type="number" min="1" max="30" placeholder="如：5" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">预算范围</label>
+            <input class="form-input" id="travel-budget" type="text" placeholder="如：3000-5000元" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">偏好类型</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="travel-pref" value="综合" checked />综合</label>
+            <label class="radio-label"><input type="radio" name="travel-pref" value="美食" />美食</label>
+            <label class="radio-label"><input type="radio" name="travel-pref" value="历史文化" />历史文化</label>
+            <label class="radio-label"><input type="radio" name="travel-pref" value="自然风光" />自然风光</label>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="submitTravel()">生成行程</button>
+      </div>
+
+      <div class="panel" id="panel-translate">
+        <h3 class="panel-title">🌐 智能翻译</h3>
+        <div class="form-group">
+          <label class="form-label">原文内容</label>
+          <textarea class="form-textarea" id="translate-text" placeholder="在此粘贴需要翻译的内容..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">目标语言</label>
+            <select class="form-select" id="translate-lang">
+              <option value="中文">中文</option>
+              <option value="英文">英文</option>
+              <option value="日文">日文</option>
+              <option value="韩文">韩文</option>
+              <option value="法文">法文</option>
+              <option value="德文">德文</option>
+              <option value="西班牙文">西班牙文</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">使用场景</label>
+            <select class="form-select" id="translate-scene">
+              <option value="日常对话">日常对话</option>
+              <option value="正式文件">正式文件</option>
+              <option value="技术文档">技术文档</option>
+              <option value="文学作品">文学作品</option>
+            </select>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="submitTranslate()">开始翻译</button>
+      </div>
+
+      <div class="panel" id="panel-recipe">
+        <h3 class="panel-title">🍳 食谱推荐</h3>
+        <div class="form-group">
+          <label class="form-label">现有食材 <span class="label-hint">（可不填，随机推荐）</span></label>
+          <input class="form-input" id="recipe-ingredients" type="text" placeholder="如：鸡蛋, 西红柿, 豆腐（逗号分隔）" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">口味偏好</label>
+            <select class="form-select" id="recipe-taste">
+              <option value="随意">随意</option>
+              <option value="清淡">清淡</option>
+              <option value="辣">辣</option>
+              <option value="酸甜">酸甜</option>
+              <option value="咸鲜">咸鲜</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">难度</label>
+            <select class="form-select" id="recipe-difficulty">
+              <option value="简单">简单（新手友好）</option>
+              <option value="中等">中等</option>
+              <option value="较难">较难</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">可用时间：<span id="time-display">30</span> 分钟</label>
+          <input class="form-range" id="recipe-time" type="range" min="5" max="120" value="30" oninput="updateTimeDisplay(this.value)" />
+        </div>
+        <button class="submit-btn" onclick="submitRecipe()">推荐食谱</button>
+      </div>
+
+      <div class="panel" id="panel-reply">
+        <h3 class="panel-title">💬 社恐回复助手</h3>
+        <div class="form-group">
+          <label class="form-label">对方发来的消息</label>
+          <textarea class="form-textarea" id="reply-message" placeholder="粘贴对方的消息原文..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">对方身份</label>
+            <select class="form-select" id="reply-role">
+              <option value="领导">领导</option>
+              <option value="同事">同事</option>
+              <option value="朋友">朋友</option>
+              <option value="家人">家人</option>
+              <option value="客户">客户</option>
+              <option value="陌生人">陌生人</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">回复语气</label>
+            <select class="form-select" id="reply-tone">
+              <option value="随和">随和</option>
+              <option value="正式">正式</option>
+              <option value="幽默">幽默</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">我想达到的目的</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="reply-goal" value="随便回复" checked />随便回复</label>
+            <label class="radio-label"><input type="radio" name="reply-goal" value="礼貌拒绝" />礼貌拒绝</label>
+            <label class="radio-label"><input type="radio" name="reply-goal" value="礼貌拖延" />礼貌拖延</label>
+            <label class="radio-label"><input type="radio" name="reply-goal" value="表达感谢" />表达感谢</label>
+            <label class="radio-label"><input type="radio" name="reply-goal" value="道歉" />道歉</label>
+            <label class="radio-label"><input type="radio" name="reply-goal" value="寻求帮助" />寻求帮助</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">补充背景 <span class="label-hint">（可选）</span></label>
+          <input class="form-input" id="reply-context" type="text" placeholder="如：我最近真的很忙" />
+        </div>
+        <button class="submit-btn" onclick="submitReply()">生成回复</button>
+      </div>
+
+    </section>
+
+    <section class="result-section" id="result-section" style="display:none">
+      <div class="result-header">
+        <h3 class="result-title">AI 结果</h3>
+        <button class="copy-btn" onclick="copyResult()">复制全部</button>
+      </div>
+      <div class="result-body" id="result-body"></div>
+    </section>
+
+    <div class="loading" id="loading" style="display:none">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">AI 正在思考中...</p>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Personal Assistant · Multi-Agent System · Powered by GPT</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
